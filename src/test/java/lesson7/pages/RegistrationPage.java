@@ -1,8 +1,10 @@
 package lesson7.pages;
 
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import lesson7.pages.components.CalendarComponent;
 import lesson7.pages.components.TableFormComponent;
+import org.junit.jupiter.api.AfterEach;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -103,5 +105,11 @@ public class RegistrationPage {
 
     public void checkTableNotExist() {
         tableFormComponent.getTableElement().shouldNotBe(visible);
+    }
+
+    public RegistrationPage removeBanner() {
+        executeJavaScript("$('#fixedban').remove()");
+        executeJavaScript("$('footer').remove()");
+        return this;
     }
 }
