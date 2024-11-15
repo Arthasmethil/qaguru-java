@@ -28,7 +28,7 @@ public class SauceDemoLoginPage {
         return this;
     }
 
-    public void LogIn() {
+    public void logIn() {
         loginButton.click();
     }
 }

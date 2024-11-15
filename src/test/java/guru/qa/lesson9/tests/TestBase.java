@@ -28,7 +28,7 @@ public class TestBase {
                 .openPage()
                 .setUsername(propertiesProvider.getLogin())
                 .setPassword(propertiesProvider.getPassword())
-                .LogIn();
+                .logIn();
     }
 
     @AfterEach

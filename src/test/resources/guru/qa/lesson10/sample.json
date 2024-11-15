@@ -1,0 +1,24 @@
+{
+  "department": {
+    "id": 987,
+    "name": "IT Department",
+    "manager": "Jane Smith",
+    "location": "Building A, 3rd Floor",
+    "employees": [
+      {
+        "id": 12345,
+        "name": "John Doe",
+        "position": "Software Engineer",
+        "email": "john.doe@example.com",
+        "phone": "+1234567890"
+      },
+      {
+        "id": 67890,
+        "name": "Alice Johnson",
+        "position": "System Analyst",
+        "email": "alice.johnson@example.com",
+        "phone": "+0987654321"
+      }
+    ]
+  }
+}

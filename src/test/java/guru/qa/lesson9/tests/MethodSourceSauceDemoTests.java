@@ -39,7 +39,7 @@ public class MethodSourceSauceDemoTests extends TestBase {
         );
     }
 
-    @MethodSource
+    @MethodSource("addSeveralItemsToBasketAndOpenIt")
     @Tag("REGRESS")
     @Tag("WEB")
     @ParameterizedTest(name = "User {1} has in basket {0} products")
@@ -48,7 +48,7 @@ public class MethodSourceSauceDemoTests extends TestBase {
                 .openPage()
                 .setUsername(user.getUsername())
                 .setPassword(user.getPassword())
-                .LogIn();
+                .logIn();
 
         sauceDemoCatalogPage
                 .addItemsToBasket(products)
