@@ -36,10 +36,19 @@ dependencies {
     testRuntimeOnly('org.aspectj:aspectjweaver:1.9.22.1')
 }
 
-tasks.test {
-    useJUnitPlatform{
-        if (project.hasProperty("includeTags")) {
-            includeTags(project.property("includeTags") as String)
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
+
+    testLogging {
+        lifecycle {
+            events "started", "skipped", "failed", "standard_error", "standard_out"
+            exceptionFormat "short"
         }
+    }
+}
+
+task simple_remote_test(type: Test) {
+    useJUnitPlatform {
+        includeTags("remoteControlJenkins")
     }
 }
