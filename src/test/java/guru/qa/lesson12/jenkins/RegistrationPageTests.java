@@ -13,6 +13,7 @@ public class RegistrationPageTests extends TestBase {
     @Test
     void fillWholeDataFormWithAllureAndJenkinsTest() {
         registrationPage.openPage()
+                .removeBanner()
                 .setFirstName("Arthas")
                 .setLastName("Menethil")
                 .setEmail("lichking@blizzard.com")
