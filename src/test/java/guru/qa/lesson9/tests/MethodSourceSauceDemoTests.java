@@ -26,7 +26,7 @@ public class MethodSourceSauceDemoTests extends TestBase {
         //override to avoid login
     }
 
-    static Stream<Arguments> addSeveralItemsToBasketAndOpenIt() {
+    static Stream<Arguments> addSeveralItemsToBasketAndOpenItTest() {
         return Stream.of(
                 Arguments.of(
                         new SauceDemoProduct[] {SAUCE_LABS_BACKPACK, SAUCE_LABS_BIKE_LIGHT},
@@ -39,11 +39,11 @@ public class MethodSourceSauceDemoTests extends TestBase {
         );
     }
 
-    @MethodSource("addSeveralItemsToBasketAndOpenIt")
+    @MethodSource("addSeveralItemsToBasketAndOpenItTest")
     @Tag("REGRESS")
     @Tag("WEB")
     @ParameterizedTest(name = "User {1} has in basket {0} products")
-    void addSeveralItemsToBasketAndOpenIt(SauceDemoProduct[] products, User user) {
+    void addSeveralItemsToBasketAndOpenItTest(SauceDemoProduct[] products, User user) {
         loginPage
                 .openPage()
                 .setUsername(user.getUsername())

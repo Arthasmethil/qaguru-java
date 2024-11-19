@@ -21,7 +21,7 @@ public class AllureTests extends TestBase {
 
     @DisplayName("Check issue's name via pure Selenide")
     @Test
-    public void testIssueSearch() {
+    public void testIssueSearchTest() {
         SelenideLogger.addListener("allure", new AllureSelenide());
 
         open(URL);
@@ -37,7 +37,7 @@ public class AllureTests extends TestBase {
 
     @DisplayName("Check issue's name via lambda steps")
     @Test
-    public void testLambdaStep() {
+    public void testLambdaStepTest() {
         SelenideLogger.addListener("allure", new AllureSelenide());
 
         step("Open Github main page", () -> open(URL));
@@ -55,7 +55,7 @@ public class AllureTests extends TestBase {
 
     @DisplayName("Check issue's name via annotated step")
     @Test
-    public void testAnnotatedStep() {
+    public void testAnnotatedStepTest() {
         SelenideLogger.addListener("allure", new AllureSelenide());
         WebSteps steps = new WebSteps();
         steps.openMainPage();

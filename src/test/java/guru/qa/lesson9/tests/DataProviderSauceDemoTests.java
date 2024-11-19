@@ -21,7 +21,7 @@ public class DataProviderSauceDemoTests extends TestBase {
     @ParameterizedTest(name = "Adding {0} to a basket")
     @Tag("SMOKE")
     @Tag("WEB")
-    void addOneItemToBasketViaValueSource(String item) {
+    void addOneItemToBasketViaValueSourceTest(String item) {
         sauceDemoCatalogPage
                 .findItemViaDescription(item)
                 .addItemViaDescription(item)
@@ -31,7 +31,7 @@ public class DataProviderSauceDemoTests extends TestBase {
     @EnumSource(SauceDemoProduct.class)
     @Tag("WEB")
     @ParameterizedTest(name = "Use enum as a data provider - {0} Card")
-    void openItemCardAndCheckName(SauceDemoProduct item) {
+    void openItemCardAndCheckNameTest(SauceDemoProduct item) {
 
         sauceDemoCatalogPage.openItemCard(item.getProductName());
 
