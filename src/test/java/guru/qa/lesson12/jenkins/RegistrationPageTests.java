@@ -5,12 +5,14 @@ import guru.qa.lesson12.jenkins.pages.RegistrationPage;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-@Tag("remoteControlJenkins")
+
 public class RegistrationPageTests extends TestBase {
 
     RegistrationPage registrationPage = new RegistrationPage();
 
     @Test
+    @Tag("remoteControlJenkins")
+    @Tag("propertiesJenkins")
     void fillWholeDataFormWithAllureAndJenkinsTest() {
         registrationPage.openPage()
                 .removeBanner()
@@ -39,5 +41,21 @@ public class RegistrationPageTests extends TestBase {
                 .checkTableResponse("Picture", "guru_png.png")
                 .checkTableResponse("Address", "Frozen Throne")
                 .checkTableResponse("State and City", "Uttar Pradesh Agra");
+    }
+
+    @Test
+    @Tag("propertiesJenkins")
+    void fillMinimalDataFormTest() {
+        registrationPage.openPage()
+                .setFirstName("Arthas")
+                .setLastName("Menethil")
+                .setGender("Male")
+                .setUserNumber("9990009343")
+                .submit();
+
+        registrationPage
+                .checkTableResponse("Student Name", "Arthas Menethil")
+                .checkTableResponse("Gender", "Male")
+                .checkTableResponse("Mobile", "9990009343");
     }
 }
