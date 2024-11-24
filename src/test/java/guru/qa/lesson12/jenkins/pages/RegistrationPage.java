@@ -67,7 +67,7 @@ public class RegistrationPage {
         return this;
     }
 
-    @Step("Set date of birth as {0}.{1}.{2}")
+    @Step("Set date of birth as {0}")
     public RegistrationPage setDateOfBirth(LocalDate localDate) {
         calendarInput.click();
         String day = String.valueOf(localDate.getDayOfMonth());
