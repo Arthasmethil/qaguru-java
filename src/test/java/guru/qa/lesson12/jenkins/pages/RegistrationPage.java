@@ -5,6 +5,8 @@ import guru.qa.lesson12.jenkins.pages.components.CalendarComponent;
 import guru.qa.lesson12.jenkins.pages.components.TableFormComponent;
 import io.qameta.allure.Step;
 
+import java.time.LocalDate;
+
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
@@ -66,12 +68,15 @@ public class RegistrationPage {
     }
 
     @Step("Set date of birth as {0}.{1}.{2}")
-    public RegistrationPage setDateOfBirth(String day, String month, String year) {
+    public RegistrationPage setDateOfBirth(LocalDate localDate) {
         calendarInput.click();
+        String day = String.valueOf(localDate.getDayOfMonth());
+        String month = localDate.getMonth().name().charAt(0) +
+                localDate.getMonth().name().substring(1).toLowerCase();
+        String year = String.valueOf(localDate.getYear());
         calendarComponent.setDate(day, month, year);
         return this;
     }
-
     @Step("Set subject as {0}")
     public RegistrationPage setSubjectsInput(String value) {
         subjectsInput.setValue(value).pressEnter();
