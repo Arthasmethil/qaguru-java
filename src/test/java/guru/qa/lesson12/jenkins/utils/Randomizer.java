@@ -1,4 +1,4 @@
-package guru.qa.lesson8.utils;
+package guru.qa.lesson12.jenkins.utils;
 
 import com.github.javafaker.Faker;
 
