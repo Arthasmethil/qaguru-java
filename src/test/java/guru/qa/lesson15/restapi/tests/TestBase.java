@@ -1,10 +1,10 @@
-package guru.qa.lesson15.restapi.config;
+package guru.qa.lesson15.restapi.tests;
 
 import guru.qa.lesson15.restapi.constants.Constants;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeAll;
 
-public class TestConfig {
+public class TestBase {
 
     @BeforeAll
     public static void setup() {

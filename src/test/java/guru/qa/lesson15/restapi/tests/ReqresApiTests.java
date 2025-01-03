@@ -1,6 +1,5 @@
 package guru.qa.lesson15.restapi.tests;
 
-import guru.qa.lesson15.restapi.config.TestConfig;
 import guru.qa.lesson15.restapi.constants.Constants;
 import org.junit.jupiter.api.Test;
 
@@ -9,7 +8,7 @@ import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.Matchers.notNullValue;
 
-public class ReqresApiTests extends TestConfig {
+public class ReqresApiTests extends TestBase {
 
     @Test
     void successfulRegistrationTest() {
