@@ -1,11 +1,24 @@
 plugins {
     id 'java-library'
     id 'io.qameta.allure' version '2.10.0'
+    id "io.freefair.lombok" version "6.0.0-m2"
 }
 
 repositories {
     mavenCentral()
 }
+
+def restAssuredVersion = "5.3.1",
+    allureVersion = "2.19.0",
+    junitJupiterVersion = "5.11.2",
+    selenideversion = "7.5.1",
+    javafakerVersion = "1.0.2",
+    pdfTestVersion = "1.5.0",
+    xlsTestVersion  = "1.4.3",
+    opencsvVersion  = "5.9",
+    jacksonDatabindVersion = "2.18.1",
+    assertjCoreVersion  = "3.26.3"
+
 
 allure {
     report {
@@ -23,16 +36,18 @@ allure {
 
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.11.2'
-    testImplementation 'com.codeborne:selenide:7.5.1'
-    testImplementation 'com.github.javafaker:javafaker:1.0.2'
-    testImplementation 'com.codeborne:pdf-test:1.5.0'
-    testImplementation 'com.codeborne:xls-test:1.4.3'
-    testImplementation 'com.opencsv:opencsv:5.9'
-    testImplementation 'com.fasterxml.jackson.core:jackson-databind:2.18.1'
-    testImplementation 'org.assertj:assertj-core:3.26.3'
-    testImplementation 'io.qameta.allure:allure-selenide:2.19.0'
-    testImplementation 'io.rest-assured:rest-assured:5.3.1'
+    testImplementation "org.junit.jupiter:junit-jupiter:$junitJupiterVersion"
+    testImplementation "com.codeborne:selenide:$selenideversion"
+    testImplementation "com.github.javafaker:javafaker:$javafakerVersion"
+    testImplementation "com.codeborne:pdf-test:$pdfTestVersion"
+    testImplementation "com.codeborne:xls-test:$xlsTestVersion"
+    testImplementation "com.opencsv:opencsv:$opencsvVersion"
+    testImplementation "com.fasterxml.jackson.core:jackson-databind:$jacksonDatabindVersion"
+    testImplementation "org.assertj:assertj-core:$assertjCoreVersion"
+    testImplementation "io.qameta.allure:allure-selenide:$allureVersion"
+    testImplementation "io.rest-assured:rest-assured:$restAssuredVersion"
+    testImplementation "io.rest-assured:json-schema-validator:$restAssuredVersion"
+    testImplementation "io.qameta.allure:allure-rest-assured:$allureVersion"
 
     testRuntimeOnly('org.aspectj:aspectjweaver:1.9.22.1')
 }
@@ -51,5 +66,11 @@ tasks.withType(Test).configureEach {
 task simple_remote_test(type: Test) {
     useJUnitPlatform {
         includeTags("remoteControlJenkins")
+    }
+}
+
+task api_tests(type: Test) {
+    useJUnitPlatform {
+        includeTags("API")
     }
 }
