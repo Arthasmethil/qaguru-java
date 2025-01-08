@@ -7,15 +7,8 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static guru.qa.lesson16.modelapi.constants.Constants.*;
-import static guru.qa.lesson16.modelapi.specs.CreationSpec.creationRequestSpec;
-import static guru.qa.lesson16.modelapi.specs.CreationSpec.creationResponseSpec;
-import static guru.qa.lesson16.modelapi.specs.DeleteUserSpec.deleteRequestSpec;
-import static guru.qa.lesson16.modelapi.specs.DeleteUserSpec.deleteResponseSpec;
-import static guru.qa.lesson16.modelapi.specs.LoginSpec.loginRequestSpec;
-import static guru.qa.lesson16.modelapi.specs.LoginSpec.loginResponseSpec;
-import static guru.qa.lesson16.modelapi.specs.RegistrationSpec.*;
-import static guru.qa.lesson16.modelapi.specs.UpdateUserSpec.updateRequestSpec;
-import static guru.qa.lesson16.modelapi.specs.UpdateUserSpec.updateResponseSpec;
+import static guru.qa.lesson16.modelapi.constants.Endpoints.*;
+import static guru.qa.lesson16.modelapi.specs.ApiSpecifications.*;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -26,18 +19,18 @@ public class ReqresApiTests extends TestBase {
     @Tag("API")
     @Test
     void successfulRegistrationTest() {
-        RegistrationBodyModel registerData = new RegistrationBodyModel();
+        UserBodyModel registerData = new UserBodyModel();
         registerData.setEmail(EMAIL);
         registerData.setPassword(REGISTER_PASSWORD);
 
         RegistrationResponseModel response = step("Make request", () ->
                 given()
-                        .spec(registrationRequestSpec)
+                        .spec(requestSpec)
                         .body(registerData)
                         .when()
-                        .post()
+                        .post(REGISTER_ENDPOINT)
                         .then()
-                        .spec(registrationResponseSpec)
+                        .spec(successfulResponseSpec200)
                         .extract().as(RegistrationResponseModel.class));
 
         step("Check response", () -> Assertions.assertNotNull(response.getToken()));
@@ -47,16 +40,16 @@ public class ReqresApiTests extends TestBase {
     @Tag("API")
     @Test
     void unsuccessfulRegistrationTest() {
-        RegistrationBodyModel registerData = new RegistrationBodyModel();
+        UserBodyModel registerData = new UserBodyModel();
         registerData.setEmail(EMAIL);
 
         RegistrationErrorModel registrationError = step("Make registration request", () ->
-                given(registrationRequestSpec)
+                given(requestSpec)
                         .body(registerData)
                         .when()
-                        .post()
+                        .post(REGISTER_ENDPOINT)
                         .then()
-                        .spec(unsuccessfulRegistrationResponseSpec)
+                        .spec(errorResponseSpec400)
                         .extract().as(RegistrationErrorModel.class));
 
         step("Check response", () -> assertThat(registrationError.getError()).isEqualTo("Missing password"));
@@ -66,18 +59,18 @@ public class ReqresApiTests extends TestBase {
     @Tag("API")
     @Test
     void successfulLoginTest() {
-        LoginBodyModel loginBodyModelData = new LoginBodyModel();
-        loginBodyModelData.setEmail(EMAIL);
-        loginBodyModelData.setPassword(AUTH_PASSWORD);
+        UserBodyModel userBodyModelData = new UserBodyModel();
+        userBodyModelData.setEmail(EMAIL);
+        userBodyModelData.setPassword(AUTH_PASSWORD);
 
         LoginResponseModel response = step("Make login request", () ->
                 given()
-                        .spec(loginRequestSpec)
-                        .body(loginBodyModelData)
+                        .spec(requestSpec)
+                        .body(userBodyModelData)
                         .when()
-                        .post()
+                        .post(LOGIN_ENDPOINT)
                         .then()
-                        .spec(loginResponseSpec)
+                        .spec(successfulResponseSpec200)
                         .extract().as(LoginResponseModel.class));
         step("Check response", () -> assertThat(response.getToken()).isNotNull());
     }
@@ -92,12 +85,12 @@ public class ReqresApiTests extends TestBase {
 
         CreationUserResponseModel response = step("Make create user request", () ->
                 given()
-                        .spec(creationRequestSpec)
+                        .spec(requestSpec)
                         .body(creationBodyModelData)
                         .when()
-                        .post()
+                        .post(GENERAL_USERS_ENDPOINT)
                         .then()
-                        .spec(creationResponseSpec)
+                        .spec(creationResponseSpec201)
                         .extract().as(CreationUserResponseModel.class));
 
         step("Check response", () -> {
@@ -117,12 +110,12 @@ public class ReqresApiTests extends TestBase {
 
         UpdateUserModel response = step("Make create user request", () ->
                 given()
-                        .spec(updateRequestSpec)
+                        .spec(requestSpec)
                         .body(updateBodyModelData)
                         .when()
-                        .put()
+                        .put(USERS_2_ENDPOINT)
                         .then()
-                        .spec(updateResponseSpec)
+                        .spec(successfulResponseSpec200)
                         .extract().as(UpdateUserModel.class));
 
         step("Check response", () -> {
@@ -137,11 +130,11 @@ public class ReqresApiTests extends TestBase {
     @Test
     void deleteUserTest() {
         int statusCode = step("Make request to delete user", () ->
-                given(deleteRequestSpec)
+                given(requestSpec)
                         .when()
-                        .delete()
+                        .delete(USERS_2_ENDPOINT)
                         .then()
-                        .spec(deleteResponseSpec)
+                        .spec(deleteResponseSpec204)
                         .extract().statusCode());
 
         step("Check response that user was deleted", () ->
