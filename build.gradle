@@ -54,7 +54,7 @@ dependencies {
 
 tasks.withType(Test).configureEach {
     useJUnitPlatform()
-
+    systemProperties(System.getProperties())
     testLogging {
         lifecycle {
             events "started", "skipped", "failed", "standard_error", "standard_out"
@@ -63,7 +63,7 @@ tasks.withType(Test).configureEach {
     }
 }
 
-task simple_remote_test(type: Test) {
+tasks.register('simple_remote_test', Test) {
     useJUnitPlatform {
         includeTags("remoteControlJenkins")
     }
