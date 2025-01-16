@@ -2,6 +2,7 @@ package guru.qa.lesson18.tests;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
+import guru.qa.lesson18.helpers.Attach;
 import io.qameta.allure.selenide.AllureSelenide;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.AfterEach;
@@ -41,6 +42,10 @@ public class TestBase {
 
     @AfterEach
     void shutDown() {
+        Attach.screenshotAs("Last screenshot");
+        Attach.addVideo();
+        Attach.pageSource();
+        Attach.browserConsoleLogs();
         closeWebDriver();
     }
 }
