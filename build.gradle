@@ -17,7 +17,8 @@ def restAssuredVersion = "5.3.1",
     xlsTestVersion  = "1.4.3",
     opencsvVersion  = "5.9",
     jacksonDatabindVersion = "2.18.1",
-    assertjCoreVersion  = "3.26.3"
+    assertjCoreVersion  = "3.26.3",
+    ownerVersion  = "1.0.4"
 
 
 allure {
@@ -48,6 +49,7 @@ dependencies {
     testImplementation "io.rest-assured:rest-assured:$restAssuredVersion"
     testImplementation "io.rest-assured:json-schema-validator:$restAssuredVersion"
     testImplementation "io.qameta.allure:allure-rest-assured:$allureVersion"
+    testImplementation "org.aeonbits.owner:owner:$ownerVersion"
 
     testRuntimeOnly('org.aspectj:aspectjweaver:1.9.22.1')
 }
@@ -69,8 +71,14 @@ tasks.register('simple_remote_test', Test) {
     }
 }
 
-task api_tests(type: Test) {
+tasks.register('api_tests', Test) {
     useJUnitPlatform {
         includeTags("API")
+    }
+}
+
+tasks.register('api_ui_tests', Test) {
+    useJUnitPlatform {
+        includeTags("API_UI")
     }
 }

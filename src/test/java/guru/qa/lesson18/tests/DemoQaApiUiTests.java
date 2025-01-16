@@ -15,7 +15,7 @@ import static guru.qa.lesson18.constants.Constants.*;
 public class DemoQaApiUiTests extends TestBase {
 
     @DisplayName("Delete book with wrong ISBN")
-    @Tag("API")
+    @Tag("API_UI")
     @Test
     void deleteBookWithWrongIsbn() {
         BooksApi.clearBooksForUser();
@@ -33,7 +33,7 @@ public class DemoQaApiUiTests extends TestBase {
     }
 
     @DisplayName("Delete book that was deleted before")
-    @Tag("API")
+    @Tag("API_UI")
     @Test
     void tryDeleteWithoutUserTokenTest() {
         BooksApi.clearBooksForUser();
@@ -83,7 +83,7 @@ public class DemoQaApiUiTests extends TestBase {
         profilePage.checkAddedBook(BOOK_JS.get("title"));
         profilePage.checkAddedBook(BOOK_GIT.get("title"));
         profilePage.deleteByTitle(BOOK_JAVASCRIPT.get("title"));
-        profilePage.openProfilePage();
+        profilePage.pageRefresh();
         profilePage.checkBookWasDeletedBook(BOOK_JAVASCRIPT.get("title"));
     }
 }

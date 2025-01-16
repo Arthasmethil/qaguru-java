@@ -1,9 +1,10 @@
 package guru.qa.lesson18.api.auth;
 
-import guru.qa.lesson18.helpers.PropertyProvider;
+import guru.qa.lesson18.config.AuthConfig;
 import guru.qa.lesson18.models.LoginResponseModel;
 import guru.qa.lesson18.models.LoginViewModel;
 import io.qameta.allure.Step;
+import org.aeonbits.owner.ConfigFactory;
 
 import static guru.qa.lesson18.constants.Endpoints.LOGIN_ENDPOINT;
 import static guru.qa.lesson18.specs.ApiSpecifications.requestSpec;
@@ -15,8 +16,9 @@ public class AuthorizationApi {
     @Step("Add book for an User")
     public static LoginResponseModel authResponse() {
         LoginViewModel authData = new LoginViewModel();
-        authData.setUserName(PropertyProvider.getProperty("username-demoqa"));
-        authData.setPassword(PropertyProvider.getProperty("password-demoqa"));
+        AuthConfig authConfig = ConfigFactory.create(AuthConfig.class, System.getProperties());
+        authData.setUserName(authConfig.username());
+        authData.setPassword(authConfig.password());
         return given()
                 .spec(requestSpec)
                 .body(authData)
