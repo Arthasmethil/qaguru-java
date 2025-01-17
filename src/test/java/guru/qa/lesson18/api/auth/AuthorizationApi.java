@@ -12,6 +12,15 @@ import static io.restassured.RestAssured.given;
 
 public class AuthorizationApi {
 
+    private static LoginResponseModel cachedAuthResponse;
+
+    private static LoginResponseModel getAuthResponse() {
+        if (cachedAuthResponse == null) {
+            cachedAuthResponse = authResponse();
+        }
+        return cachedAuthResponse;
+    }
+
     @Step("Login as user on demoqa")
     public static LoginResponseModel authResponse() {
         LoginViewModel authData = new LoginViewModel();
@@ -33,7 +42,15 @@ public class AuthorizationApi {
                 .extract().as(LoginResponseModel.class);
     }
 
-    public static String authToken = authResponse().getToken();
-    public static String authUserId = authResponse().getUserId();
-    public static String authExpires = authResponse().getExpires();
+    public static String getAuthToken() {
+        return getAuthResponse().getToken();
+    }
+
+    public static String getAuthUserId() {
+        return getAuthResponse().getUserId();
+    }
+
+    public static String getAuthExpires() {
+        return getAuthResponse().getExpires();
+    }
 }

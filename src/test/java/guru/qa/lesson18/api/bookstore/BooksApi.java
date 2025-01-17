@@ -45,7 +45,7 @@ public class BooksApi {
         List<Isbn> isbnList = new ArrayList<>();
         Isbn bookIsbn = new Isbn();
 
-        userBooksData.setUserId(AuthorizationApi.authUserId);
+        userBooksData.setUserId(AuthorizationApi.getAuthUserId());
         bookIsbn.setIsbn(book.getIsbn());
         isbnList.add(bookIsbn);
         userBooksData.setCollectionOfIsbns(isbnList);
@@ -61,7 +61,7 @@ public class BooksApi {
     @Step("Delete book for an User")
     public static ValidatableResponse deleteBook(String isbn) {
         BookForDeleteModel userDeleteBookData = new BookForDeleteModel();
-        userDeleteBookData.setUserId(AuthorizationApi.authUserId);
+        userDeleteBookData.setUserId(AuthorizationApi.getAuthUserId());
         userDeleteBookData.setIsbn(isbn);
         return given()
                 .spec(getRequestSpecAuthorizedUser())
@@ -75,7 +75,7 @@ public class BooksApi {
     @Step("Delete book for an User")
     public static ValidatableResponse deleteBookWithoutToken(String isbn) {
         BookForDeleteModel userDeleteBookData = new BookForDeleteModel();
-        userDeleteBookData.setUserId(AuthorizationApi.authUserId);
+        userDeleteBookData.setUserId(AuthorizationApi.getAuthUserId());
         userDeleteBookData.setIsbn(isbn);
         return given()
                 .spec(requestSpec)

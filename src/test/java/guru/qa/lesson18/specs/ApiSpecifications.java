@@ -20,7 +20,7 @@ public class ApiSpecifications {
         return with()
                 .filter(withCustomTemplates())
                 .contentType(JSON)
-                .header("Authorization", "Bearer " + AuthorizationApi.authToken)
+                .header("Authorization", "Bearer " + AuthorizationApi.getAuthToken())
                 .log().all();
     }
 
@@ -28,8 +28,8 @@ public class ApiSpecifications {
         return with()
                 .filter(withCustomTemplates())
                 .contentType(JSON)
-                .header("Authorization", "Bearer " + AuthorizationApi.authToken)
-                .queryParams("UserId", AuthorizationApi.authUserId)
+                .header("Authorization", "Bearer " + AuthorizationApi.getAuthToken())
+                .queryParams("UserId", AuthorizationApi.getAuthUserId())
                 .log().all();
     }
 

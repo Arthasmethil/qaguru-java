@@ -20,9 +20,9 @@ public class LoginExtension implements BeforeEachCallback {
     @Step("Add Cookie to browser for Authorization")
     public void beforeEach(ExtensionContext context) {
         open(ICON_URL);
-        getWebDriver().manage().addCookie(new Cookie(USER_ID_SESSION, AuthorizationApi.authUserId));
-        getWebDriver().manage().addCookie(new Cookie(EXPIRES_TOKEN_SESSION, AuthorizationApi.authExpires));
-        getWebDriver().manage().addCookie(new Cookie(TOKEN_SESSION, AuthorizationApi.authToken));
+        getWebDriver().manage().addCookie(new Cookie(USER_ID_SESSION, AuthorizationApi.getAuthUserId()));
+        getWebDriver().manage().addCookie(new Cookie(EXPIRES_TOKEN_SESSION, AuthorizationApi.getAuthExpires()));
+        getWebDriver().manage().addCookie(new Cookie(TOKEN_SESSION, AuthorizationApi.getAuthToken()));
     }
 
 }
