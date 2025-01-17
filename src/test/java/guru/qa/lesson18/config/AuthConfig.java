@@ -2,9 +2,10 @@ package guru.qa.lesson18.config;
 
 import org.aeonbits.owner.Config;
 
+@Config.LoadPolicy(Config.LoadType.MERGE)
 @Config.Sources({
         "system:properties",
-        "file:tml/auth.properties",
+        "file:./auth.properties",
         "classpath:auth.properties"
 
 })
