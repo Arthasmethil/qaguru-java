@@ -7,7 +7,6 @@ import org.aeonbits.owner.Config;
         "system:properties",
         "file:./auth.properties",
         "classpath:auth.properties"
-
 })
 public interface AuthConfig extends Config {
 

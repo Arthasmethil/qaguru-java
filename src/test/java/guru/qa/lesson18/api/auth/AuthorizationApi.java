@@ -22,17 +22,12 @@ public class AuthorizationApi {
         return cachedAuthResponse;
     }
 
-    @Step("Login as user on demoqa")
+    @Step("Login as user demoqa")
     public static LoginResponseModel authResponse() {
         LoginViewModel authData = new LoginViewModel();
-//        authData.setUserName(PropertyProvider.getProperty("username"));
-//        authData.setPassword(PropertyProvider.getProperty("password"));
-
         AuthConfig authConfig = ConfigFactory.create(AuthConfig.class, System.getProperties());
         authData.setUserName(authConfig.username());
         authData.setPassword(authConfig.password());
-
-
         return given()
                 .spec(requestSpec)
                 .body(authData)

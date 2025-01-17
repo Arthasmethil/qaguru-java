@@ -22,15 +22,6 @@ public class ProfilePage {
         return this;
     }
 
-    @SneakyThrows
-    @Step("Refresh opened page")
-    public ProfilePage pageRefresh() {
-        Selenide.sleep(3000);
-        Selenide.refresh();
-        return this;
-    }
-
-
     @Step("Check added book")
     public void checkAddedBook (String titleBook) {
         assertThat(reactTable.getText()).contains(titleBook);
@@ -49,6 +40,7 @@ public class ProfilePage {
         deleteOkButton
                 .shouldBe(Condition.interactable)
                 .click();
+        Selenide.sleep(3000);
         getFocusedElement()
                 .pressEnter();
     }

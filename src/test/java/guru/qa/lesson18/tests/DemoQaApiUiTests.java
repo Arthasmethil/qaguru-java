@@ -11,42 +11,6 @@ import static guru.qa.lesson18.constants.Constants.*;
 
 public class DemoQaApiUiTests extends TestBase {
 
-//    @DisplayName("Delete book with wrong ISBN")
-//    @Tag("API_UI")
-//    @Test
-//    void deleteBookWithWrongIsbn() {
-//        BooksApi.clearBooksForUser();
-//
-//        BooksApi.addBook(BooksApi.getBookByIsbn(BOOK_JAVASCRIPT.get("isbn")));
-//
-//        ValidatableResponse deletionResponse = BooksApi.deleteBook(WRONG_ISBN);
-//
-//        int deleteSameBookStatusCode = deletionResponse.extract().statusCode();
-//        Assertions.assertThat(deleteSameBookStatusCode).isEqualTo(BAD_REQUEST);
-//
-//        ErrorModel error = deletionResponse.extract().as(ErrorModel.class);
-//        Assertions.assertThat(error.getCode()).isEqualTo(ERROR_CODE_BAD_REQUEST);
-//        Assertions.assertThat(error.getMessage()).isEqualTo(ERROR_MESSAGE_BAD_REQUEST);
-//    }
-//
-//    @DisplayName("Delete book that was deleted before")
-//    @Tag("API_UI")
-//    @Test
-//    void tryDeleteWithoutUserTokenTest() {
-//        BooksApi.clearBooksForUser();
-//
-//        BooksApi.addBook(
-//                BooksApi.getBookByIsbn(BOOK_JAVASCRIPT.get("isbn"))
-//        );
-//
-//        ValidatableResponse deletionResponse = BooksApi.deleteBookWithoutToken(BOOK_JAVASCRIPT.get("isbn"));
-//
-//        ErrorModel error = deletionResponse.extract().as(ErrorModel.class);
-//        Assertions.assertThat(deletionResponse.extract().statusCode()).isEqualTo(UNAUTHORIZED);
-//        Assertions.assertThat(error.getCode()).isEqualTo(ERROR_CODE_UNAUTHORIZED);
-//        Assertions.assertThat(error.getMessage()).isEqualTo(ERROR_MESSAGE_UNAUTHORIZED);
-//    }
-
     @DisplayName("Add one book to an user")
     @Tag("API_UI")
     @WithLogin
@@ -80,7 +44,6 @@ public class DemoQaApiUiTests extends TestBase {
         profilePage.checkAddedBook(BOOK_JS.get("title"));
         profilePage.checkAddedBook(BOOK_GIT.get("title"));
         profilePage.deleteByTitle(BOOK_JAVASCRIPT.get("title"));
-        profilePage.pageRefresh();
         profilePage.checkBookWasDeletedBook(BOOK_JAVASCRIPT.get("title"));
     }
 }
