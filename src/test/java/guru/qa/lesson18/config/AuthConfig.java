@@ -3,9 +3,10 @@ package guru.qa.lesson18.config;
 import org.aeonbits.owner.Config;
 
 @Config.Sources({
-//        "file:tml/auth.properties",
-//        "classpath:auth.properties",
-        "system:properties"
+        "system:properties",
+        "file:tml/auth.properties",
+        "classpath:auth.properties"
+
 })
 public interface AuthConfig extends Config {
 
