@@ -25,7 +25,7 @@ public class ProfilePage {
     @SneakyThrows
     @Step("Refresh opened page")
     public ProfilePage pageRefresh() {
-        Selenide.sleep(1000);
+        Selenide.sleep(3000);
         Selenide.refresh();
         return this;
     }
